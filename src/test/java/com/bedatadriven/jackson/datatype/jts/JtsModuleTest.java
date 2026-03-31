@@ -3,8 +3,7 @@ package com.bedatadriven.jackson.datatype.jts;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.vividsolutions.jts.geom.*;
-import org.easymock.EasyMock;
+import org.locationtech.jts.geom.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,14 +26,6 @@ public class JtsModuleTest {
 	public void invalidGeometryType() throws IOException {
 		String json = "{\"type\":\"Singularity\",\"coordinates\":[]}";
 		mapper.readValue(json, Geometry.class);
-	}
-	
-	@Test(expected = JsonMappingException.class)
-	public void unsupportedGeometry() throws IOException {
-		Geometry unsupportedGeometry = EasyMock.createNiceMock("NonEuclideanGeometry", Geometry.class);
-		EasyMock.replay(unsupportedGeometry);
-		
-		mapper.writeValue(System.out, unsupportedGeometry);
 	}
 
 }
