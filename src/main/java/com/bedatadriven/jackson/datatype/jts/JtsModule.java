@@ -17,6 +17,14 @@ public class JtsModule extends SimpleModule {
         super("JtsModule", new Version(1, 0, 0, null,"com.bedatadriven","jackson-datatype-jts"));
 
         addSerializer(Geometry.class, new GeometrySerializer());
+        addSerializer(Point.class, new GeometrySerializer());
+        addSerializer(LineString.class, new GeometrySerializer());
+        addSerializer(MultiLineString.class, new GeometrySerializer());
+        addSerializer(Polygon.class, new GeometrySerializer());
+        addSerializer(MultiPolygon.class, new GeometrySerializer());
+        addSerializer(MultiPoint.class, new GeometrySerializer());
+        addSerializer(GeometryCollection.class, new GeometrySerializer());
+        
         GenericGeometryParser genericGeometryParser = new GenericGeometryParser(geometryFactory);
         addDeserializer(Geometry.class, new GeometryDeserializer<Geometry>(genericGeometryParser));
         addDeserializer(Point.class, new GeometryDeserializer<Point>(new PointParser(geometryFactory)));
